@@ -1,0 +1,16 @@
+{
+  "package": "lunaglaxe7.claraww.mixin",
+  "required": true,
+  "refmap": "claraww.refmap.json",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": ["MixinEventHandlerRunic",
+    "MixinArcaneWandRecipe",
+    "MixinItemWandCasting",
+    "MixinModelWand",
+    "MixinItemStack",
+    "MixinInfusionRecipe",
+    "MixinShapedOreRecipe",
+    "MixinShapedRecipes"
+  ]
+}

@@ -17,6 +17,8 @@ item.nuggetMeteoricIron.name=§9陨铁粒
 #item.ItemManaBeanperditio.name=魔豆-Perditio
 #item.ItemManaBeanterra.name=魔豆-Terra
 item.Wand.mismatched.cap=离子
+item.wandParts.rod=杖柄
+item.wandParts.rod.staff=杖芯
 tile.wand_forge.name=法杖锻造台
 
 #wand_forge

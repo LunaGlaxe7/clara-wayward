@@ -15,4 +15,8 @@ public class LogHandler {
     public static void info(String message) {
         logger.log(Level.INFO, message);
     }
+
+    public static void error(String message){
+        logger.log(Level.ERROR, message);
+    }
 }

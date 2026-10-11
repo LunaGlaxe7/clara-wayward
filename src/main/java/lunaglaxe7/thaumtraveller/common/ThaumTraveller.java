@@ -47,7 +47,7 @@ public class ThaumTraveller {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         instance = this;
-        Config.configurate(event.getSuggestedConfigurationFile());
+        Config.configure(event.getSuggestedConfigurationFile());
         BaubleExpandedSlots.tryAssignSlotOfType(BaubleExpandedSlots.beltType);
         // Compat.initiate();
         TTRBlocks.registerBlocks();

@@ -10,8 +10,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
+import lunaglaxe7.thaumtraveller.adapter.ItemWandCap;
 import lunaglaxe7.thaumtraveller.api.UType;
-import lunaglaxe7.thaumtraveller.api.util.WandHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.visnet.VisNetHandler;
@@ -288,7 +288,8 @@ public class TileForge extends TileEntity implements ISidedInventory {
     @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         return index == 0 && !working
-                && (stack.getItem() instanceof ItemWandCasting || WandHelper.getSpecialCapFromCap(stack) != null);
+                && stack != null
+                && (stack.getItem() instanceof ItemWandCasting || stack.getItem() instanceof ItemWandCap);
     }
 
     private void clearAspects(AspectList list) {

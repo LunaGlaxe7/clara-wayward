@@ -1,4 +1,4 @@
-package lunaglaxe7.thaumtraveller.api.util;
+package lunaglaxe7.thaumtraveller.adapter;
 
 import java.util.Collections;
 import java.util.HashMap;

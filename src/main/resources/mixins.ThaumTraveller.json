@@ -4,12 +4,10 @@
   "refmap": "thaumtraveller.refmap.json",
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
-  "mixins": [
-      "MixinEventHandlerRunic",
-      "MixinArcaneWandRecipe",
-      "MixinWandCap",
-      "MixinWandRod",
-      "MixinItemWandCasting",
-      "MixinModelWand"
-  ]
+  "mixins": ["MixinEventHandlerRunic",
+    "MixinArcaneWandRecipe",
+    "MixinItemWandCasting",
+    "MixinModelWand",
+    "MixinItemStack",
+    "MixinInfusionRecipe"]
 }

@@ -8,8 +8,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import lunaglaxe7.thaumtraveller.api.SpecialCap;
-import lunaglaxe7.thaumtraveller.api.util.WandHelper;
+import lunaglaxe7.thaumtraveller.adapter.WandAdapter;
+import thaumcraft.api.wands.WandCap;
 import thaumcraft.client.renderers.models.gear.ModelWand;
 
 @Mixin(value = ModelWand.class, remap = false)
@@ -23,7 +23,7 @@ abstract class MixinModelWand {
                     shift = At.Shift.AFTER,
                     ordinal = 1))
     private void bindTopFirst(ItemStack wand, CallbackInfo c) {
-        SpecialCap capTop = WandHelper.getTopSpecialCap(wand);
+        WandCap capTop = WandAdapter.getTopCap(wand);
         if (capTop != null) Minecraft.getMinecraft().renderEngine.bindTexture(capTop.getTexture());
     }
 
@@ -35,7 +35,7 @@ abstract class MixinModelWand {
                     shift = At.Shift.BEFORE,
                     ordinal = 5))
     private void bindBottomSecond(ItemStack wand, CallbackInfo c) {
-        SpecialCap capBot = WandHelper.getBotSpecialCap(wand);
+        WandCap capBot = WandAdapter.getBotCap(wand);
         if (capBot != null) Minecraft.getMinecraft().renderEngine.bindTexture(capBot.getTexture());
     }
 

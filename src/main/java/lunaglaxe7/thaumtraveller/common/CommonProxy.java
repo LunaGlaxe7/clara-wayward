@@ -4,16 +4,15 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import lunaglaxe7.thaumtraveller.adapter.WandAdapter;
 import lunaglaxe7.thaumtraveller.api.BodyEssence;
-import lunaglaxe7.thaumtraveller.api.util.AspectHelper;
+import lunaglaxe7.thaumtraveller.adapter.AspectHelper;
 import lunaglaxe7.thaumtraveller.common.event.TravelEventManager;
 import lunaglaxe7.thaumtraveller.common.network.NetHandler;
 
 public class CommonProxy {
 
     BodyEssence bodyEssence = new BodyEssence();
-
-    public WandPartCache wandPartCache = new WandPartCache();
 
     public void preInit(FMLPreInitializationEvent event) {
         NetHandler.init();
@@ -25,8 +24,8 @@ public class CommonProxy {
 
     public void postInit(FMLPostInitializationEvent event) {
         AspectHelper.init();
-        wandPartCache.registerAllNormalSpecialCaps();
         TravelEventManager.init();
+        WandAdapter.init();
     }
 
     public BodyEssence getBodyEssence() {

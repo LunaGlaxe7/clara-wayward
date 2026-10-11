@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ChatComponentTranslation;
 
-import lunaglaxe7.thaumtraveller.api.util.AspectHelper;
+import lunaglaxe7.thaumtraveller.adapter.AspectHelper;
 import lunaglaxe7.thaumtraveller.common.ThaumTraveller;
 import thaumcraft.api.aspects.Aspect;
 

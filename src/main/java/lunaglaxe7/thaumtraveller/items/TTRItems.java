@@ -4,6 +4,8 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import lunaglaxe7.thaumtraveller.adapter.ItemWandCap;
+import lunaglaxe7.thaumtraveller.adapter.ItemWandRod;
 import lunaglaxe7.thaumtraveller.common.TTRContents;
 
 // regist items of thaumtraveller
@@ -21,5 +23,7 @@ public class TTRItems {
             if (isOreDicRegisted) continue;
             OreDictionary.registerOre(nugget.name, nugget);
         }
+        GameRegistry.registerItem(ItemWandCap.instance, ItemWandCap.instance.getUnlocalizedName(), TTRContents.MODID);
+        GameRegistry.registerItem(ItemWandRod.instance, ItemWandRod.instance.getUnlocalizedName(), TTRContents.MODID);
     }
 }

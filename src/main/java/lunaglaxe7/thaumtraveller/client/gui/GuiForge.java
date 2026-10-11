@@ -16,8 +16,8 @@ import net.minecraft.util.StatCollector;
 import org.lwjgl.opengl.GL11;
 
 import lunaglaxe7.thaumtraveller.api.UType;
-import lunaglaxe7.thaumtraveller.api.util.AspectHelper;
-import lunaglaxe7.thaumtraveller.api.util.WandHelper;
+import lunaglaxe7.thaumtraveller.adapter.AspectHelper;
+import lunaglaxe7.thaumtraveller.adapter.WandAdapter;
 import lunaglaxe7.thaumtraveller.client.DrawHelper;
 import lunaglaxe7.thaumtraveller.client.gui.button.GuiButtonCap;
 import lunaglaxe7.thaumtraveller.client.gui.button.GuiButtonForge;
@@ -89,11 +89,11 @@ public class GuiForge extends GuiContainer {
         startButton.enabled = true;
 
         if (isWand && stack != null) {
-            ItemStack cap = WandHelper.getTopCapItem(stack);
+            ItemStack cap = WandAdapter.getTopCapItem(stack);
             GuiButton capTop = new GuiButtonCap(this, cap, 1, x + 74, y + 6);
             buttonList.add(capTop);
             capTop.enabled = true;
-            cap = WandHelper.getBotCapItem(stack);
+            cap = WandAdapter.getBotCapItem(stack);
             GuiButton capBot = new GuiButtonCap(this, cap, 2, x + 74, y + 67);
             buttonList.add(capBot);
             capBot.enabled = true;
@@ -220,11 +220,11 @@ public class GuiForge extends GuiContainer {
         }
         if (this.isWand && xx >= 75 && xx < 75 + 16) {
             if (yy >= 7 && yy < 7 + 16) {
-                ItemStack cap = WandHelper.getTopCapItem(stack);
+                ItemStack cap = WandAdapter.getTopCapItem(stack);
                 drawWandCap(cap, mouseX, mouseY, "cap2#");
             }
             if (yy >= 68 && yy < 68 + 16) {
-                ItemStack cap = WandHelper.getBotCapItem(stack);
+                ItemStack cap = WandAdapter.getBotCapItem(stack);
                 drawWandCap(cap, mouseX, mouseY, "cap1#");
             }
         }
@@ -242,11 +242,11 @@ public class GuiForge extends GuiContainer {
                         if (isWand && (cap1 || cap2)) {
                             ItemStack cap;
                             if (cap1) {
-                                cap = WandHelper.getBotCapItem(stack);
+                                cap = WandAdapter.getBotCapItem(stack);
                                 drawAppliedWhenWand(cap, mouseX, mouseY, "cap1#", index);
                             }
                             if (cap2) {
-                                cap = WandHelper.getTopCapItem(stack);
+                                cap = WandAdapter.getTopCapItem(stack);
                                 drawAppliedWhenWand(cap, mouseX, mouseY, "cap2#", index);
                             }
                         }

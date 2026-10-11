@@ -1,15 +1,16 @@
-# ThaumTraveller
+# ClaraWayward
 > 本Mod是**Thaumcraft（神秘时代）**的附属Mod，运行于**Minecraft 1.7.10**。虽然名字带有“旅行”，实际内容和名称关联不大，主要是作者关于Thaumcraft的各种脑洞想法的具现化。
 > 目前仍在持续更新中
 
 ## 已实装内容
-- 新增数个与 Galacticraft（星系）相关的研究：陨铁粒获取、陨铁嬗变
-- 支持用炼金术合成 Applied Energistics 2（应用能源2）的充能赛特斯石英
+- 新增与 Galacticraft（星系）相关的研究：陨铁粒获取、陨铁嬗变
+- 用炼金术合成 Applied Energistics 2（应用能源2）的充能赛特斯石英
 - 新增元始要素魔豆的转换配方
 - 自定义了数个专属要素（Aspects）
 - 兼容Baubles Expanded模组，新增额外腰带槽，可同时装备腰带与法杖核心手袋
 - 额外腰带槽上的符文护盾可正常生效（法杖核心手袋不会生效）
-- 现在可以用不同的杖端制作一柄法杖（需要完成对应研究，目前仅可以做法杖，不能做手杖/权杖）
+- 现在可以用不同的杖端制作一柄法杖（需要完成对应研究，目前仅可以做法杖，不能做权杖）
+- 已部分实装了身之源质Body Essence, 可以用be view \<player\> 或者 be clear \<player\>指令， 当ordo源质大于500点时背包中的法杖将可以自动充能.
 
 ## 安装注意
 - 需要BaublesExpanded-GTNH、Thaumcraft和Unimixin作为前置

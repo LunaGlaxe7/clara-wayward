@@ -11,6 +11,7 @@
     "MixinItemStack",
     "MixinInfusionRecipe",
     "MixinShapedOreRecipe",
-    "MixinShapedRecipes"
+    "MixinShapedRecipes",
+    "MixinArcaneSceptreRecipe"
   ]
 }

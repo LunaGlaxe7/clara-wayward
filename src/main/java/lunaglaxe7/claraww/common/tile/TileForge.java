@@ -11,6 +11,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
 import lunaglaxe7.claraww.adapter.ItemWandCap;
+import lunaglaxe7.claraww.adapter.WandAdapter;
 import lunaglaxe7.claraww.api.UType;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -289,7 +290,8 @@ public class TileForge extends TileEntity implements ISidedInventory {
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         return index == 0 && !working
                 && stack != null
-                && (stack.getItem() instanceof ItemWandCasting || stack.getItem() instanceof ItemWandCap);
+                && ((stack.getItem() instanceof ItemWandCasting && !WandAdapter.hasNBTKey(stack, "sceptre"))
+                        || stack.getItem() instanceof ItemWandCap);
     }
 
     private void clearAspects(AspectList list) {

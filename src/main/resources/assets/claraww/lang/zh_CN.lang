@@ -70,7 +70,7 @@ tc.research_page.CWW.MISMATCHEDCAP=通常来讲必须用成对的杖端才能制
 
 tc.research_name.CWW.WANDFORGE=法杖升级
 tc.research_text.CWW.WANDFORGE=不再那么贵
-tc.research_page.CWW.WANDFORGE.1=无法忍受杖端低下的性能后，你制造出这个装置.现在可以对你的杖端和法杖进行升级了.通过充能节点向杖端灌入灵气，你得以提升了杖端的各项性能.<BR>要注意的是，每个升级都是单独作用在对应的杖端上的，因此效果会跟看起来的不同.
+tc.research_page.CWW.WANDFORGE.1=无法忍受杖端低下的性能后，你制造出这个装置.现在可以对你的杖端和法杖进行升级了.通过充能节点向杖端灌入灵气，你得以提升了杖端的各项性能.<BR>要注意的是，每个升级都是单独作用在对应的杖端上的，因此效果会跟看起来的不同.<BR>但是它们无法作用在权杖上，即使用升级过的杖端来制作.
 tc.research_page.CWW.WANDFORGE.2=这里是目前可以进行的升级种类.<BR>传导<BR>每次使杖端提供的魔力减免能力增加5%.<BR>亲和<BR>使杖端在制造成法杖时的消耗减少20%.
 
 tc.research_name.CWW.SILVERTREE=人工银树

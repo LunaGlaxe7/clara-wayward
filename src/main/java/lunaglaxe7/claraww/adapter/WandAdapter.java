@@ -29,6 +29,13 @@ public class WandAdapter {
         wand.setTagInfo("cap2", new NBTTagString(CapManager.getTagById(cap2.getItemDamage())));
     }
 
+    public static boolean hasNBTKey(ItemStack item, String key) {
+        if (item != null && item.getItem() != null) {
+            return item.hasTagCompound() && item.getTagCompound().hasKey(key);
+        }
+        return false;
+    }
+
     public static ItemStack getTopCapItem(ItemStack wand) {
         return getCapItemFromWand(wand, 2);
     }
@@ -90,15 +97,21 @@ public class WandAdapter {
             // will be deleted
             if (nbt.hasKey("cap")) out = CapManager.getDiscount(nbt.getString("cap"), a.getTag());
             if (nbt.hasKey("cap1")) {
-                out = (CapManager.getDiscount(nbt.getString("cap1"), a.getTag())
-                        * ModEventManager.multiplyDiscountModifiers(new CapInfoEvent.CapDiscountMul(wand, 1))
-                        * ModEventManager
-                                .multiplySpecialDiscountModifiers(new CapInfoEvent.SpecialDiscountMul(wand, a, 1))
-                        + CapManager.getDiscount(nbt.getString("cap2"), a.getTag())
-                                * ModEventManager.multiplyDiscountModifiers(new CapInfoEvent.CapDiscountMul(wand, 2))
-                                * ModEventManager.multiplySpecialDiscountModifiers(
-                                        new CapInfoEvent.SpecialDiscountMul(wand, a, 2)))
-                        / 2f;
+                if (!hasNBTKey(wand, "sceptre")) {
+                    out = (CapManager.getDiscount(nbt.getString("cap1"), a.getTag())
+                            * ModEventManager.multiplyDiscountModifiers(new CapInfoEvent.CapDiscountMul(wand, 1))
+                            * ModEventManager
+                                    .multiplySpecialDiscountModifiers(new CapInfoEvent.SpecialDiscountMul(wand, a, 1))
+                            + CapManager.getDiscount(nbt.getString("cap2"), a.getTag())
+                                    * ModEventManager
+                                            .multiplyDiscountModifiers(new CapInfoEvent.CapDiscountMul(wand, 2))
+                                    * ModEventManager.multiplySpecialDiscountModifiers(
+                                            new CapInfoEvent.SpecialDiscountMul(wand, a, 2)))
+                            / 2f;
+                } else {
+                    out = (CapManager.getDiscount(nbt.getString("cap1"), a.getTag())
+                            + CapManager.getDiscount(nbt.getString("cap2"), a.getTag())) / 2f;
+                }
             }
         }
         return out;

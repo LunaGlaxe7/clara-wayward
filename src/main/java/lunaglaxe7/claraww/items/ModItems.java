@@ -9,7 +9,7 @@ import lunaglaxe7.claraww.adapter.ItemWandRod;
 import lunaglaxe7.claraww.common.ModContents;
 
 // regist items of claraww
-public class TTRItems {
+public class ModItems {
 
     public static boolean isOreDicRegisted;
 

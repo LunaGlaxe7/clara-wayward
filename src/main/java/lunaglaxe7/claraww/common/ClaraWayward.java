@@ -25,7 +25,7 @@ import lunaglaxe7.claraww.common.tile.TileForge;
 import lunaglaxe7.claraww.compat.Compat;
 import lunaglaxe7.claraww.compat.CompatItems;
 import lunaglaxe7.claraww.items.ItemNugget;
-import lunaglaxe7.claraww.items.TTRItems;
+import lunaglaxe7.claraww.items.ModItems;
 
 @Mod(
         modid = ModContents.MODID,
@@ -55,7 +55,7 @@ public class ClaraWayward {
         ModBlocks.registerBlocks();
         GameRegistry.registerTileEntity(TileForge.class, "cww_forge_tile");
         ItemNugget.addNuggets();
-        TTRItems.itemRegister(event);
+        ModItems.itemRegister(event);
         ModAspects.initAspects();
 
         bodyEssenceHandler = new EventHandlerBodyEssence();

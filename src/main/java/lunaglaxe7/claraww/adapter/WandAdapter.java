@@ -1,5 +1,8 @@
 package lunaglaxe7.claraww.adapter;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -8,11 +11,21 @@ import net.minecraft.nbt.NBTTagString;
 import lunaglaxe7.claraww.common.event.CapInfoEvent;
 import lunaglaxe7.claraww.common.event.ModEventManager;
 import lunaglaxe7.claraww.core.node.CapManager;
+import lunaglaxe7.claraww.core.node.ItemId;
 import lunaglaxe7.claraww.core.node.RodManager;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.wands.WandCap;
 
 public class WandAdapter {
+
+    private static Set<ItemId> claimId = new HashSet<>();
+
+    /**
+     * @return true when id has been checked
+     */
+    public static boolean claimId(ItemId id) {
+        return !claimId.add(id);
+    }
 
     public static void setRod(ItemStack wand, ItemStack rod) {
         wand.setTagInfo("rod", new NBTTagString(RodManager.getById(rod.getItemDamage()).getTag()));

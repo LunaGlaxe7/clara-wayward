@@ -109,7 +109,7 @@ public class NodeRodAdapter {
     public static int updateRods(ItemStack rod) {
         if (rod != null && rod.getItem() != null) {
             int itemId = Item.getIdFromItem(rod.getItem());
-            if (itemId >= 0) {
+            if (itemId > 0) {
                 String tag = rodItemMap.get(new ItemId(itemId, rod.getItemDamage()));
                 if (RodManager.checkTag(tag)) {
                     return RodManager.getId(tag);

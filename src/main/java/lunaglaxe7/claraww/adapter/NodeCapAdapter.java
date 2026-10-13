@@ -66,7 +66,7 @@ public class NodeCapAdapter {
     public static int updateCaps(ItemStack cap) {
         if (cap != null && cap.getItem() != null) {
             int itemId = Item.getIdFromItem(cap.getItem());
-            if (itemId > 0) {
+            if (itemId >= 0) {
                 String tag = capItemMap.get(new ItemId(itemId, cap.getItemDamage()));
                 if (CapManager.checkTag(tag)) {
                     return CapManager.getId(tag);

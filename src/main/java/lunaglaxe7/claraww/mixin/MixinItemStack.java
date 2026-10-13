@@ -15,8 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import lunaglaxe7.claraww.adapter.ItemWandCap;
 import lunaglaxe7.claraww.adapter.ItemWandRod;
-import lunaglaxe7.claraww.adapter.NodeCapAdapter;
-import lunaglaxe7.claraww.adapter.NodeRodAdapter;
 import lunaglaxe7.claraww.core.node.CapManager;
 import lunaglaxe7.claraww.core.node.RodManager;
 import thaumcraft.common.items.wands.ItemWandCasting;
@@ -50,9 +48,9 @@ public class MixinItemStack {
     @Inject(method = "readFromNBT", at = @At(value = "TAIL"))
     private void readTag(NBTTagCompound nbt, CallbackInfo c) {
         ItemStack stack = (ItemStack) (Object) this;
-        if (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG)
-                && stack.getTagCompound().getLong(TAG) == value)
-            return;
+        // if (stack.hasTagCompound() && stack.getTagCompound().hasKey(TAG)
+        // && stack.getTagCompound().getLong(TAG) == value)
+        // return;
         // make sure item correct to its tag
         if (nbt.hasKey("WandCapTag")) {
             String tag = nbt.getString("WandCapTag");
@@ -87,24 +85,24 @@ public class MixinItemStack {
         }
 
         // universalize caps and rods
-        int id;
-        id = NodeCapAdapter.updateCaps(stack);
-        if (CapManager.checkId(id)) {
-            func_150996_a(ItemWandCap.instance);
-            itemDamage = id;
-            stack.setTagInfo(TAG, new NBTTagLong(value));
-            return;
-        }
-
-        id = NodeRodAdapter.updateRods(stack);
-        if (RodManager.checkId(id)) {
-            func_150996_a(ItemWandRod.instance);
-            itemDamage = id;
-            stack.setTagInfo(TAG, new NBTTagLong(value));
-            return;
-        }
-
-        stack.setTagInfo(TAG, new NBTTagLong(value));
+        // int id;
+        // id = NodeCapAdapter.updateCaps(stack);
+        // if (CapManager.checkId(id)) {
+        // func_150996_a(ItemWandCap.instance);
+        // itemDamage = id;
+        // stack.setTagInfo(TAG, new NBTTagLong(value));
+        // return;
+        // }
+        //
+        // id = NodeRodAdapter.updateRods(stack);
+        // if (RodManager.checkId(id)) {
+        // func_150996_a(ItemWandRod.instance);
+        // itemDamage = id;
+        // stack.setTagInfo(TAG, new NBTTagLong(value));
+        // return;
+        // }
+        //
+        // stack.setTagInfo(TAG, new NBTTagLong(value));
     }
 
     private void checkOldWands(ItemStack wand) {

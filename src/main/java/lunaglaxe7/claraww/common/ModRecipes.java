@@ -9,6 +9,7 @@ import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import lunaglaxe7.claraww.Config;
 import lunaglaxe7.claraww.client.block.ModBlocks;
+import lunaglaxe7.claraww.compat.Compat;
 import lunaglaxe7.claraww.compat.CompatItems;
 import lunaglaxe7.claraww.items.ItemNugget;
 import lunaglaxe7.claraww.util.ManaBeanHelper;
@@ -25,9 +26,15 @@ public class ModRecipes {
         addRecipesBasic();
 
         if (Config.crossMod) {
-            addRecipesGC();
-            addRecipesAE();
-            addRecipesTB();
+            if (Compat.gc) {
+                addRecipesGC();
+            }
+            if (Compat.ae2) {
+                addRecipesAE();
+            }
+            if (Compat.tb) {
+                addRecipesTB();
+            }
         }
     }
 

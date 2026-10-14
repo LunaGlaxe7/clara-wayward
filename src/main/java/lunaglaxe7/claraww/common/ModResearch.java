@@ -7,9 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 
-import cpw.mods.fml.common.Optional;
 import lunaglaxe7.claraww.Config;
 import lunaglaxe7.claraww.client.block.ModBlocks;
+import lunaglaxe7.claraww.compat.Compat;
 import lunaglaxe7.claraww.compat.CompatItems;
 import lunaglaxe7.claraww.items.ItemNugget;
 import thaumcraft.api.ItemApi;
@@ -29,9 +29,15 @@ public class ModResearch {
     public static void addResearch() {
         addResearchBasic();
         if (Config.crossMod) {
-            addResearchGC();
-            addResearchAE();
-            addResearchTB();
+            if (Compat.gc) {
+                addResearchGC();
+            }
+            if (Compat.ae2) {
+                addResearchAE();
+            }
+            if (Compat.tb) {
+                addResearchTB();
+            }
         }
     }
 
@@ -105,7 +111,6 @@ public class ModResearch {
 
     }
 
-    @Optional.Method(modid = ModContents.GCID)
     public static void addResearchGC() {
         new ResearchItem(
                 "CWW.MOON",
@@ -148,7 +153,6 @@ public class ModResearch {
                         .registerResearchItem();
     }
 
-    @Optional.Method(modid = ModContents.AEID)
     public static void addResearchAE() {
         new ResearchItem(
                 "CWW.CHARGE_CERTUS",
@@ -165,7 +169,6 @@ public class ModResearch {
                         .registerResearchItem();
     }
 
-    @Optional.Method(modid = ModContents.TBID)
     public static void addResearchTB() {
         ResearchPage[] pages = new ResearchPage[8];
         pages[0] = new ResearchPage("tc.research_page.CWW.VOIDSEED");

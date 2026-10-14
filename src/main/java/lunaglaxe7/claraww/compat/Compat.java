@@ -2,11 +2,10 @@ package lunaglaxe7.claraww.compat;
 
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.Loader;
 import lunaglaxe7.claraww.Config;
 import lunaglaxe7.claraww.LogHandler;
 import lunaglaxe7.claraww.common.ModAspects;
-import lunaglaxe7.claraww.common.ModContents;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
@@ -16,34 +15,33 @@ import thaumcraft.api.aspects.AspectList;
 // mainly add aspects
 public class Compat {
 
-    // public static boolean gc = false;
-    // public static boolean gaia = false;
-    // public static boolean fm = false;
-    // public static boolean ae2 = false;
-    // public static boolean tb = false;
+    public static boolean gc = false;
+    public static boolean fm = false;
+    public static boolean ae2 = false;
+    public static boolean tb = false;
     public static AspectList list;
 
-    // public static void initiate() {
-    // if (!Config.crossMod) {
-    // return;
-    // }
-    // gc = Config.gc && Loader.isModLoaded("GalacticraftCore");
-    // gaia = Config.gaia && Loader.isModLoaded("GrimoireOfGaia");
-    // fm = Loader.isModLoaded("ForbiddenMagic");
-    // ae2 = Loader.isModLoaded("appliedenergistics2");
-    // tb = Loader.isModLoaded("thaumicbases");
-    // }
+    public static void init() {
+        if (!Config.crossMod) {
+            return;
+        }
+        gc = Config.gc && Loader.isModLoaded("GalacticraftCore");
+        fm = Loader.isModLoaded("ForbiddenMagic");
+        ae2 = Loader.isModLoaded("appliedenergistics2");
+        tb = Loader.isModLoaded("thaumicbases");
+    }
 
     // add aspects for other mods
     public static void compatify() {
         if (Config.crossMod) {
-            compatifyGC();
+            if (gc) {
+                compatifyGC();
+            }
             // compatifyGaia();
         }
     }
 
     // regist aspects for items and mobs from Galacticraft, not all of them
-    @Optional.Method(modid = ModContents.GCID)
     public static void compatifyGC() {
         try {
             list = new AspectList().add(ModAspects.VOYAGE, 3);

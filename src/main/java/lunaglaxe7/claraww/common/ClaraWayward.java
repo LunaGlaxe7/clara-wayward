@@ -21,6 +21,7 @@ import lunaglaxe7.claraww.Config;
 import lunaglaxe7.claraww.api.BodyEssence;
 import lunaglaxe7.claraww.client.block.ModBlocks;
 import lunaglaxe7.claraww.common.event.EventHandlerBodyEssence;
+import lunaglaxe7.claraww.common.event.EventHandlerCheckingWands;
 import lunaglaxe7.claraww.common.tile.TileForge;
 import lunaglaxe7.claraww.compat.Compat;
 import lunaglaxe7.claraww.compat.CompatItems;
@@ -45,6 +46,7 @@ public class ClaraWayward {
             serverSide = "lunaglaxe7.claraww.common.CommonProxy")
     public static CommonProxy proxy;
     public EventHandlerBodyEssence bodyEssenceHandler;
+    public EventHandlerCheckingWands wandChecking;
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -59,8 +61,10 @@ public class ClaraWayward {
         ModAspects.initAspects();
 
         bodyEssenceHandler = new EventHandlerBodyEssence();
+        wandChecking = new EventHandlerCheckingWands();
 
         MinecraftForge.EVENT_BUS.register(this.bodyEssenceHandler);
+        MinecraftForge.EVENT_BUS.register(wandChecking);
         proxy.preInit(event);
     }
 
@@ -71,6 +75,7 @@ public class ClaraWayward {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+        Compat.init();
         CompatItems.importItems();
         ModAspects.addAspects();
         Compat.compatify();

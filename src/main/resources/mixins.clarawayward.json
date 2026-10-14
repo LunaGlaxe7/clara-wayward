@@ -8,7 +8,6 @@
     "MixinArcaneWandRecipe",
     "MixinItemWandCasting",
     "MixinModelWand",
-    "MixinItemStack",
     "MixinInfusionRecipe",
     "MixinShapedOreRecipe",
     "MixinShapedRecipes",

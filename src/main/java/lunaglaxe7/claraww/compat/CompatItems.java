@@ -2,7 +2,6 @@ package lunaglaxe7.claraww.compat;
 
 import net.minecraft.item.ItemStack;
 
-import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 import lunaglaxe7.claraww.Config;
 import lunaglaxe7.claraww.common.ModContents;
@@ -56,13 +55,18 @@ public class CompatItems {
     public static void importItems() {
         importTCItems();
         if (Config.crossMod) {
-            importGCItems();
-            importAEItems();
-            importTBItems();
+            if (Compat.gc) {
+                importGCItems();
+            }
+            if (Compat.ae2) {
+                importAEItems();
+            }
+            if (Compat.tb) {
+                importTBItems();
+            }
         }
     }
 
-    @Optional.Method(modid = ModContents.TCID)
     public static void importTCItems() {
         ironCap = new ItemStack(GameRegistry.findItem(ModContents.TCID, "WandCap"), 1, 0);
         balanceShard = new ItemStack(GameRegistry.findItem(ModContents.TCID, "ItemShard"), 1, 6);
@@ -72,7 +76,6 @@ public class CompatItems {
         greatTree = new ItemStack(GameRegistry.findItem(ModContents.TCID, "blockCustomPlant"), 1);
     }
 
-    @Optional.Method(modid = ModContents.GCID)
     public static void importGCItems() {
         fallenMeteor = new ItemStack(GameRegistry.findItem("GalacticraftCore", "tile.fallenMeteor"));
         ingotMeteo = new ItemStack(GameRegistry.findItem("GalacticraftCore", "item.meteoricIronIngot"));
@@ -109,13 +112,11 @@ public class CompatItems {
         oreCheese = new ItemStack(GameRegistry.findItem("GalacticraftCore", "tile.moonBlock"), 1, 2);
     }
 
-    @Optional.Method(modid = ModContents.AEID)
     public static void importAEItems() {
         certus = new ItemStack(GameRegistry.findItem("appliedenergistics2", "item.ItemMultiMaterial"), 1, 0);
         certusCharged = new ItemStack(GameRegistry.findItem("appliedenergistics2", "item.ItemMultiMaterial"), 1, 1);
     }
 
-    @Optional.Method(modid = ModContents.TBID)
     public static void importTBItems() {
         voidSeed = new ItemStack(GameRegistry.findItem("thaumicbases", "voidSeed"), 1, 0);
     }

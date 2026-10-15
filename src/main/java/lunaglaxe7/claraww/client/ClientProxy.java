@@ -1,5 +1,8 @@
 package lunaglaxe7.claraww.client;
 
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import lunaglaxe7.claraww.client.entity.EntityWandRender;
+import lunaglaxe7.claraww.common.entity.EntityWandFly;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -27,6 +30,7 @@ public class ClientProxy extends CommonProxy {
         super.init(event);
         ClientRegistry.bindTileEntitySpecialRenderer(TileForge.class, new RenderForge());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.forge), new RenderItemForge());
+        RenderingRegistry.registerEntityRenderingHandler(EntityWandFly.class, new EntityWandRender());
     }
 
     @SideOnly(Side.CLIENT)

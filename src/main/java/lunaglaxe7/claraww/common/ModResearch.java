@@ -109,6 +109,15 @@ public class ModResearch {
                                 new ResearchPage((CrucibleRecipe) (recipes.get("SilverTree"))))
                         .setSecondary().registerResearchItem();
 
+        new ResearchItem(
+                "CWW.WANDFLIGHT",
+                ModContents.CWWRESEARCHCATKEY,
+                new AspectList().add(Aspect.AIR,3).add(Aspect.FLIGHT,5).add(Aspect.TRAVEL,3),
+                0,-2,3,
+                new ItemStack(Items.feather)
+        ).setPages(
+                new ResearchPage("tc.research_page.CWW.WANDFLIGHT")
+        ).setParents("CWW.TRAVEL", "HOVERHARNESS").registerResearchItem();
     }
 
     public static void addResearchGC() {

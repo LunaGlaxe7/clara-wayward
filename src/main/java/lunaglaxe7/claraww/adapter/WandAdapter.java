@@ -18,15 +18,6 @@ import thaumcraft.api.wands.WandCap;
 
 public class WandAdapter {
 
-    private static Set<ItemId> claimId = new HashSet<>();
-
-    /**
-     * @return true when id has been checked
-     */
-    public static boolean claimId(ItemId id) {
-        return !claimId.add(id);
-    }
-
     public static void setRod(ItemStack wand, ItemStack rod) {
         wand.setTagInfo("rod", new NBTTagString(RodManager.getById(rod.getItemDamage()).getTag()));
         if (rod.hasTagCompound()) wand.setTagInfo("rod#", rod.getTagCompound());

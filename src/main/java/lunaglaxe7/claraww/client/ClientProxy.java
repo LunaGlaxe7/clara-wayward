@@ -1,21 +1,21 @@
 package lunaglaxe7.claraww.client;
 
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import lunaglaxe7.claraww.client.entity.EntityWandRender;
-import lunaglaxe7.claraww.common.entity.EntityWandFly;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import lunaglaxe7.claraww.client.block.ModBlocks;
+import lunaglaxe7.claraww.client.entity.EntityWandRender;
 import lunaglaxe7.claraww.client.model.render.RenderForge;
 import lunaglaxe7.claraww.client.model.render.RenderItemForge;
 import lunaglaxe7.claraww.common.CommonProxy;
+import lunaglaxe7.claraww.common.entity.EntityWandFly;
 import lunaglaxe7.claraww.common.tile.TileForge;
 
 public class ClientProxy extends CommonProxy {

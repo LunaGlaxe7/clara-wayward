@@ -1,27 +1,23 @@
 package lunaglaxe7.claraww.mixin;
 
-import lunaglaxe7.claraww.common.entity.EntityWandFly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-
 import net.minecraft.world.World;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import com.llamalad7.mixinextras.sugar.Local;
 
 import lunaglaxe7.claraww.adapter.WandAdapter;
-import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
-import thaumcraft.api.ThaumcraftApi;
+import lunaglaxe7.claraww.common.entity.EntityWandFly;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
-import thaumcraft.api.wands.ItemFocusBasic;
 import thaumcraft.api.wands.WandCap;
 import thaumcraft.common.items.wands.ItemWandCasting;
 
@@ -64,15 +60,18 @@ public class MixinItemWandCasting {
         return ori;
     }
 
-    @Inject(method = "onItemRightClick",
-    at = @At(value = "INVOKE",shift = At.Shift.AFTER, target = "Lthaumcraft/common/items/wands/ItemWandCasting;getFocus(Lnet/minecraft/item/ItemStack;)Lthaumcraft/api/wands/ItemFocusBasic;"),
-    cancellable = true)
-    private void setWandFlying(ItemStack stack, World world, EntityPlayer player, CallbackInfoReturnable<ItemStack> c){
-        var focus = ((ItemWandCasting)(Object)this).getFocus(stack);
-        if (focus == null){
-            if (((ItemWandCasting)(Object)this).isStaff(stack) &&
-                    ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(),
-                            "CWW.WANDFLIGHT")) {
+    @Inject(
+            method = "onItemRightClick",
+            at = @At(
+                    value = "INVOKE",
+                    shift = At.Shift.AFTER,
+                    target = "Lthaumcraft/common/items/wands/ItemWandCasting;getFocus(Lnet/minecraft/item/ItemStack;)Lthaumcraft/api/wands/ItemFocusBasic;"),
+            cancellable = true)
+    private void setWandFlying(ItemStack stack, World world, EntityPlayer player, CallbackInfoReturnable<ItemStack> c) {
+        var focus = ((ItemWandCasting) (Object) this).getFocus(stack);
+        if (focus == null) {
+            if (((ItemWandCasting) (Object) this).isStaff(stack)
+                    && ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "CWW.WANDFLIGHT")) {
                 if (player.ridingEntity == null && !world.isRemote) {
                     EntityWandFly fly = new EntityWandFly(world);
                     fly.setWand(stack.copy());

@@ -5,6 +5,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import lunaglaxe7.claraww.Config;
 import lunaglaxe7.claraww.adapter.AspectHelper;
 import lunaglaxe7.claraww.adapter.WandAdapter;
 import lunaglaxe7.claraww.api.BodyEssence;
@@ -17,8 +18,14 @@ public class CommonProxy {
     BodyEssence bodyEssence = new BodyEssence();
 
     public void preInit(FMLPreInitializationEvent event) {
-        EntityRegistry.registerModEntity(EntityWandFly.class,"wandFlying",999,ClaraWayward.instance,
-                80,3,true);
+        EntityRegistry.registerModEntity(
+                EntityWandFly.class,
+                "wandFlying",
+                999,
+                ClaraWayward.instance,
+                80,
+                Config.wandFlightUpdateFrequency,
+                true);
         NetHandler.init();
     }
 

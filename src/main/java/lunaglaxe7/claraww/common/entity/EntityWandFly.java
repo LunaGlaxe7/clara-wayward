@@ -90,9 +90,9 @@ public class EntityWandFly extends Entity {
 
             if (riddenByEntity == null) {
                 addTickCounting();
+                this.wand = null;
                 // 延迟2s清除
                 if (this.tickCounting > 40) {
-                    this.wand = null;
                     this.setDead();
                 }
             }

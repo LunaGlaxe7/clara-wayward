@@ -21,7 +21,7 @@ public class CommonProxy {
         EntityRegistry.registerModEntity(
                 EntityWandFly.class,
                 "wandFlying",
-                999,
+                Config.wandFlightEntityIndex,
                 ClaraWayward.instance,
                 80,
                 Config.wandFlightUpdateFrequency,

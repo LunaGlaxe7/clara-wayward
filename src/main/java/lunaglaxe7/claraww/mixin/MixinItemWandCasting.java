@@ -1,9 +1,7 @@
 package lunaglaxe7.claraww.mixin;
 
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
-import net.minecraft.world.World;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,8 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.llamalad7.mixinextras.sugar.Local;
 
 import lunaglaxe7.claraww.adapter.WandAdapter;
-import lunaglaxe7.claraww.common.entity.EntityWandFly;
-import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.wands.WandCap;
 import thaumcraft.common.items.wands.ItemWandCasting;
@@ -60,31 +56,41 @@ public class MixinItemWandCasting {
         return ori;
     }
 
-    @Inject(
-            method = "onItemRightClick",
-            at = @At(
-                    value = "INVOKE",
-                    shift = At.Shift.AFTER,
-                    target = "Lthaumcraft/common/items/wands/ItemWandCasting;getFocus(Lnet/minecraft/item/ItemStack;)Lthaumcraft/api/wands/ItemFocusBasic;"),
-            cancellable = true)
-    private void setWandFlying(ItemStack stack, World world, EntityPlayer player, CallbackInfoReturnable<ItemStack> c) {
-        var focus = ((ItemWandCasting) (Object) this).getFocus(stack);
-        if (focus == null) {
-            if (((ItemWandCasting) (Object) this).isStaff(stack)
-                    && ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "CWW.WANDFLIGHT")) {
-                if (player.ridingEntity == null && !world.isRemote) {
-                    EntityWandFly fly = new EntityWandFly(world);
-                    fly.setWand(stack.copy());
-                    fly.setPosition(player.posX, player.posY, player.posZ);
-                    world.spawnEntityInWorld(fly);
-                    player.mountEntity(fly);
-
-                    stack.stackSize = 0;
-                    c.setReturnValue(stack);
-                    c.cancel();
-                }
-            }
-        }
-    }
+    // @Inject(
+    // method = "onItemRightClick",
+    // at = @At(
+    // value = "INVOKE",
+    // shift = At.Shift.AFTER,
+    // target =
+    // "Lthaumcraft/common/items/wands/ItemWandCasting;getFocus(Lnet/minecraft/item/ItemStack;)Lthaumcraft/api/wands/ItemFocusBasic;"),
+    // cancellable = true
+    // )
+    // private void setWandFlying(ItemStack stack, World world, EntityPlayer player, CallbackInfoReturnable<ItemStack>
+    // c) {
+    // var focus = ((ItemWandCasting) (Object) this).getFocus(stack);
+    // LogHandler.info("Checking focus");
+    // if (focus == null) {
+    // LogHandler.info("No focus checked");
+    // if (((ItemWandCasting) (Object) this).isStaff(stack)
+    // && ThaumcraftApiHelper.isResearchComplete(player.getCommandSenderName(), "CWW.WANDFLIGHT")) {
+    // LogHandler.info("Research completed");
+    // if (player.ridingEntity == null && !world.isRemote) {
+    // LogHandler.info("No riding now");
+    // LogHandler.info("Creating Entity now");
+    // EntityWandFly fly = new EntityWandFly(world);
+    // fly.setWand(stack.copy());
+    // fly.setPosition(player.posX, player.posY, player.posZ);
+    // world.spawnEntityInWorld(fly);
+    // LogHandler.info("Entity Spawned");
+    // player.mountEntity(fly);
+    // LogHandler.info("Riding");
+    //
+    // stack.stackSize = 0;
+    // c.setReturnValue(stack);
+    // c.cancel();
+    // }
+    // }
+    // }
+    // }
 
 }

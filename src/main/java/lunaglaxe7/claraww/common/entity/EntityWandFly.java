@@ -19,7 +19,8 @@ public class EntityWandFly extends Entity {
     private float speedFactor;
     private ItemStack wand;
     private final int WANDKEY = 20;
-    private int visConsume = 1;
+    private int visConsume = 20;
+    private int tickCounting = 0;
 
     public EntityWandFly(World world) {
         super(world);
@@ -27,15 +28,21 @@ public class EntityWandFly extends Entity {
     }
 
     public ItemStack getWand() {
-        if (this.wand != null) {
-            return this.wand;
+        if (this.wand == null) {
+            this.wand = this.dataWatcher.getWatchableObjectItemStack(WANDKEY);
         }
-        return this.dataWatcher.getWatchableObjectItemStack(WANDKEY);
+        return this.wand;
     }
 
     public void setWand(ItemStack wand) {
         this.wand = wand;
         this.dataWatcher.updateObject(WANDKEY, wand);
+    }
+
+    public void addTickCounting() {
+        this.tickCounting = this.dataWatcher.getWatchableObjectInt(21);
+        this.tickCounting++;
+        this.dataWatcher.updateObject(21, this.tickCounting);
     }
 
     @Override
@@ -60,48 +67,67 @@ public class EntityWandFly extends Entity {
 
                 this.rotationYaw = player.rotationYaw;
 
+                double speedCount = Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
+                // 限速
+                if (speedCount > 2) {
+                    double keep = 2 / speedCount;
+                    this.motionX *= keep;
+                    this.motionY *= keep;
+                    this.motionZ *= keep;
+                }
+
+                this.moveEntity(motionX, motionY, motionZ);
+
                 player.fallDistance = 0;
+
+                // 阻力
+                if (player.moveForward == 0 && player.moveStrafing == 0) {
+                    this.motionX *= 0.5D;
+                    this.motionY *= 0.5D;
+                    this.motionZ *= 0.5D;
+                }
             }
-            double speedCount = Math.sqrt(motionX * motionX + motionY * motionY + motionZ * motionZ);
-            // 限速
-            if (speedCount > 2) {
-                double keep = 2 / speedCount;
-                this.motionX *= keep;
-                this.motionY *= keep;
-                this.motionZ *= keep;
-            }
 
-            this.moveEntity(motionX, motionY, motionZ);
-            // 阻力
-            this.motionX *= 0.95D;
-            this.motionY *= 0.95D;
-            this.motionZ *= 0.95D;
-
-        }
-
-        if (!worldObj.isRemote) {
             if (riddenByEntity == null) {
-                this.wand = null;
-                this.setDead();
+                addTickCounting();
+                // 延迟2s清除
+                if (this.tickCounting > 40) {
+                    this.wand = null;
+                    this.setDead();
+                }
             }
 
             if (riddenByEntity != null) {
                 if (riddenByEntity instanceof EntityPlayerMP player) {
-                    if (this.wand != null && wand.getItem() instanceof ItemWandCasting w) {
-                        if (!w.consumeAllVis(
-                                this.wand,
-                                player,
-                                new AspectList().add(Aspect.AIR, visConsume),
-                                true,
-                                false) || player.isSneaking()) {
-                            // give wand back to player
-                            EntityItem wand = player.dropPlayerItemWithRandomChoice(this.wand.copy(), false);
-                            wand.delayBeforeCanPickup = 0;
-                            wand.func_145797_a(player.getCommandSenderName());// set owner
-
-                            this.wand = null;
+                    if (getWand() != null && wand.getItem() instanceof ItemWandCasting w) {
+                        boolean consume = true;
+                        // 每秒消耗一次
+                        if (player.ticksExisted % 20 == 0) {
+                            consume = w.consumeAllVis(
+                                    this.wand,
+                                    player,
+                                    new AspectList().add(Aspect.AIR, visConsume),
+                                    true,
+                                    false);
+                            if (consume) {
+                                this.dataWatcher.updateObject(WANDKEY, this.wand);
+                            }
+                        }
+                        if (!consume || player.isSneaking()) {
                             riddenByEntity.mountEntity(null);
-                            this.setDead();
+
+                            // give wand back to player
+                            if (!player.inventory.addItemStackToInventory(getWand().copy())) {
+                                EntityItem wand = new EntityItem(
+                                        worldObj,
+                                        player.posX,
+                                        player.posY,
+                                        player.posZ,
+                                        getWand().copy());
+                                wand.delayBeforeCanPickup = 0;
+                                wand.func_145797_a(player.getCommandSenderName());// set owner
+                                worldObj.spawnEntityInWorld(wand);
+                            }
                         }
                     }
                 }
@@ -123,6 +149,7 @@ public class EntityWandFly extends Entity {
     @Override
     protected void entityInit() {
         this.dataWatcher.addObjectByDataType(WANDKEY, 5);// 5 -> ItemStack
+        this.dataWatcher.addObject(21, 0);
     }
 
     @Override

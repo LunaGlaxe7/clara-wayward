@@ -9,6 +9,7 @@ public class Config {
     public static boolean crossMod = true;
     public static boolean gc = true;
     public static int wandFlightUpdateFrequency = 1;
+    public static int wandFlightEntityIndex = 999;
 
     public static void configure(File targ) {
         Configuration conf = new Configuration(targ);
@@ -18,6 +19,8 @@ public class Config {
         gc = conf.get("compatibility", "Galacticraft Interaction", gc).getBoolean(true);
         wandFlightUpdateFrequency = conf.get("config", "frequency", 1, "Frequency that entity flying wand is updated.")
                 .getInt(1);
+        wandFlightEntityIndex = conf.get("config", "index", wandFlightEntityIndex, "Entity index for wand flight.")
+                .getInt();
         conf.save();
     }
 }
